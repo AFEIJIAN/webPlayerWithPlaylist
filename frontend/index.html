@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			#playlist {
+				float: right;
+			}
+
+			.playlistSongs {
+				padding: 5px;
+				border: solid 1px black;
+			}
+
+			.playlistSongs:hover {
+				border: solid 1px green;
+				padding: 5px;
+				cursor: pointer;
+			}
+		</style>
+
+		<script defer type="text/javascript" src="/music.js"></script>
+	</head>
+	<body onload="loadPlaylist();">
+		<span id="playlist">
+		</span>
+		<span>
+			<audio controls src="" id="player"></audio>
+		</span>
+	</body>
+</html>
