@@ -2,23 +2,33 @@ let playlistSource = "http://127.0.0.1:8080";
 let interval;
 
 // check and play next song if song is ended playing
+// this is the solution
 function dryRun() {
 
 	interval = setInterval( () => {
 
+		// get the player and playlist (element)
 		let player = document.getElementById("player");
 		let playlist = document.getElementById("playlist");
 
+		// first we check if player has ended playing song,
+		// check interval should based on shortest length of songs
+		// mostly 10ms or 100ms should be fine
+		// if not ended playing, do not continue
 		if ( !player.ended ) { return; }
 
 		let upcoming;
 
 		// find out div element of upcoming song from playlist
+		// or simply the upcoming song, because my playlist itself is a div
 		for (let i = 0; i < playlist.childNodes.length; i++) {
 
 			song = playlist.childNodes[i];
 
 			if ( song instanceof HTMLDivElement ) {
+				// I stored currently playing songs at dataset element already, so it's easier to check
+				// however this method is not recommended, as user can modify it
+				// src of the song also stored in playlist element ald
 				if ( player.dataset["currentSongs"] === song.dataset["src"] && song instanceof HTMLDivElement ) {
 
 					upcoming = playlist.childNodes[i+1];
@@ -27,12 +37,16 @@ function dryRun() {
 			}
 		}
 
+		// if no more songs, exit and clear the interval to prevent window.alert keep calling
 		if ( !upcoming || !(upcoming instanceof HTMLDivElement) ) { window.alert("No more songs!"); try { clearInterval(interval) } catch(err) {} return; }
 
+		// change the src attribute of player using src of upcoming song
 		player.src = upcoming.dataset["src"];
 
+		// set the currently playing song
 		player.dataset["currentSongs"] = upcoming.dataset["src"];
 
+		// play the song
 		player.play();
 
 	}, 100)

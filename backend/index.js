@@ -2,9 +2,10 @@ console.log("Ready to listen.");
 
 require("http").createServer( (req, res) => {
 
-    // Music from:
-    // https://www.bensound.com/royalty-free-music/2
-    // just for testing, no intention to redistribute
+    // add song list from here
+    // name - Name of song, to be displayed
+    // src - Directory/location of song, to be applied at src attribute of player,
+    //       Please place it at frontend folder, because backend and frontend are separated
     let songsList = [
         {"name": "betterDays", "src": "/music/bensound-betterdays.mp3"},
         {"name": "dubStep", "src": "/music/bensound-dubstep.mp3"}
